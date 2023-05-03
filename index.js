@@ -12,7 +12,20 @@ reject('La ruta no existe');
 } 
 });
 }
-// ¿la ruta es relativa o absoluta?
+// *************¿la ruta es relativa o absoluta?*************
+const path = require('path');
+const absPath = (pathname, options) => {
+    return new Promise((resolve,reject) => {
+    if (pathname) {
+    console.log(path.dirname(__dirname))
+    }
+    else {
+    // si no existe la ruta, rechaza la promesa
+    reject('La ruta no existe');
+    } 
+    });
+    }
+
 
 // Si la ruta es relativa, convertirla a absoluta
 
@@ -21,16 +34,16 @@ reject('La ruta no existe');
 // si es un directorio: ¿tiene archivos?
 
 // ************* abrirlo y leer los archivos *************
-const dirList = (path, options) => {
+const dirList = (pathname, options) => {
     const filenames = fs.readdirSync(__dirname);
     console.log("\nCurrent directory filenames:");
-    filenames.forEach(file => {
-    console.log(file);
+    filenames.forEach(pathname => {
+    console.log(pathname);
     });
     const fileObjs = fs.readdirSync(__dirname, { withFileTypes: true });
     console.log("\nCurrent directory files:");
-    fileObjs.forEach(file => {
-    console.log('soy file',file);
+    fileObjs.forEach(pathname => {
+    console.log('soy file',pathname);
     });
     };
 
@@ -41,7 +54,7 @@ const dirList = (path, options) => {
 // true:
 
 //************* ¿existen rutas .md? *************
-const path = require('path');
+
 const mdExt = (pathname, options) => {
     return new Promise((resolve,reject) => {
     const pathNameDef = path.extname(pathname);
@@ -69,4 +82,5 @@ module.exports = {
 mdLinks,
 mdExt,
 dirList,
+absPath,
 };
