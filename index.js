@@ -1,6 +1,5 @@
 
 const fs = require('fs');
-const path = require ('path');
 const mdLinks = (path, options) => {
 return new Promise((resolve,reject) => {
 // identifica si la ruta existe
@@ -11,9 +10,6 @@ else {
 // si no existe la ruta, rechaza la promesa
 reject('La ruta no existe');
 } 
- if (path.extname === '.md') {
-  console.log('la ruta es md');
-}
 // ¿la ruta es relativa o absoluta?
 
 // Si la ruta es relativa, convertirla a absoluta
@@ -31,9 +27,7 @@ reject('La ruta no existe');
 // true:
 
 // ¿existen rutas .md?
-// return new Promise ((resolve, reject) => {
-  
-// })
+
 // ejecutar validate
 
 // if validate false retornar {href,text,file}
