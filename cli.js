@@ -1,19 +1,19 @@
 const {mdLinks,} = require ('./index.js');
 const {mdExt} = require ('./index.js');
 const {dirList} = require ('./index.js');
-const {absPath} = require ('./index.js');
-
-mdLinks('notebook.md').then(() => {console.log('sí existe');})
+const {absPath, pathAbs} = require ('./index.js');
+const pathUser = process.argv[2];
+mdLinks(pathUser).then(() => {console.log('sí existe');})
 .catch((error)=>{console.log(error)}); 
 
-absPath('notebook.md').then(() => {console.log('esto es abs path');})
+absPath(pathUser).then(() => {console.log('esto es abs path');})
 .catch((error)=>{console.log(error)}); 
 
 // absPath('notebook.md');
 
-dirList();
+// dirList();
 
-mdExt('notebook.md').then(()=> {console.log('es archivo md');})
+mdExt(pathUser).then(()=> {console.log('es archivo md');})
 .catch((error)=>{console.log(error)});
 
-
+console.log(pathAbs(pathUser), 'ss')

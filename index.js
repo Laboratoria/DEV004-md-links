@@ -26,7 +26,13 @@ const absPath = (pathname, options) => {
     });
     }
 
-
+const pathAbs = (route) => {
+    if(path.isAbsolute(route)){
+        return route
+    }else{
+        return path.resolve(route)
+    }
+}
 // Si la ruta es relativa, convertirla a absoluta
 
 // ¿la ruta, es un archivo o un directorio?
@@ -83,4 +89,5 @@ mdLinks,
 mdExt,
 dirList,
 absPath,
+pathAbs,
 };
