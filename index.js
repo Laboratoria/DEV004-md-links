@@ -10,6 +10,8 @@ else {
 // si no existe la ruta, rechaza la promesa
 reject('La ruta no existe');
 } 
+});
+}
 // ¿la ruta es relativa o absoluta?
 
 // Si la ruta es relativa, convertirla a absoluta
@@ -27,6 +29,19 @@ reject('La ruta no existe');
 // true:
 
 // ¿existen rutas .md?
+const path = require('path');
+const mdExt = (pathname, options) => {
+    return new Promise((resolve,reject) => {
+    const pathNameDef = path.extname(pathname);
+        if (pathNameDef == path.extname('hello.md')) {
+    console.log('es archivo md');
+        }
+        else{
+            reject('no existe archivo md');
+    } 
+    });
+    }
+
 
 // ejecutar validate
 
@@ -37,9 +52,9 @@ reject('La ruta no existe');
 // if respuesta valida retornar {href, text, file, status} y mensaje todo ok
 
 // if respuesta invalida retornar alerta: algo fue mal.
-});
-}
+
 module.exports = {
-mdLinks
+mdLinks,
+mdExt,
 };
  

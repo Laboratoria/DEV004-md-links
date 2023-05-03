@@ -1,5 +1,5 @@
-const {mdLinks}   = require('../index.js');
-
+const {mdLinks} = require('../index.js');
+const {mdExt} = require('../index.js');
 
 // describe('mdLinks', () => {
 
@@ -17,3 +17,9 @@ const {mdLinks}   = require('../index.js');
     console.log('FIX ME!');
   });
 // });
+it('cuando el path no es md, rechaza la promesa',() => {
+  return (mdExt("/erika/cursos/noexiste.js")).catch((error)=>{
+  expect(error).toBe('no existe archivo md')
+  })
+  console.log('FIX ME!');
+});
