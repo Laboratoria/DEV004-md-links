@@ -2,7 +2,7 @@
 const fs = require('fs');
 const mdLinks = (path, options) => {
 return new Promise((resolve,reject) => {
-// identifica si la ruta existe
+// *************identifica si la ruta existe*************
 if (fs.existsSync(path)) {
 console.log('si existe');
 }
@@ -20,7 +20,19 @@ reject('La ruta no existe');
 
 // si es un directorio: ¿tiene archivos?
 
-// abrirlo y leer los archivos 
+// ************* abrirlo y leer los archivos *************
+const dirList = (path, options) => {
+    const filenames = fs.readdirSync(__dirname);
+    console.log("\nCurrent directory filenames:");
+    filenames.forEach(file => {
+    console.log(file);
+    });
+    const fileObjs = fs.readdirSync(__dirname, { withFileTypes: true });
+    console.log("\nCurrent directory files:");
+    fileObjs.forEach(file => {
+    console.log('soy file',file);
+    });
+    };
 
 // ¿existen links?
 
@@ -28,7 +40,7 @@ reject('La ruta no existe');
 
 // true:
 
-// ¿existen rutas .md?
+//************* ¿existen rutas .md? *************
 const path = require('path');
 const mdExt = (pathname, options) => {
     return new Promise((resolve,reject) => {
@@ -56,5 +68,5 @@ const mdExt = (pathname, options) => {
 module.exports = {
 mdLinks,
 mdExt,
+dirList,
 };
- 
