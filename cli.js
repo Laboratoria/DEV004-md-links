@@ -1,19 +1,21 @@
-const {mdLinks,} = require ('./index.js');
+
 const {mdExt} = require ('./index.js');
-const {dirList} = require ('./index.js');
-const {absPath, pathAbs} = require ('./index.js');
+const {existRoute} = require ('./index.js');
+const {promiseAbsPath} = require ('./index.js');
+const {isFileOrDir} = require ('./index.js');
+
+
+// acá se guarda el tercer input en la terminal.
 const pathUser = process.argv[2];
-mdLinks(pathUser).then(() => {console.log('sí existe');})
+
+existRoute(pathUser).then(() => {console.log('la ruta sí existe');})
 .catch((error)=>{console.log(error)}); 
 
-absPath(pathUser).then(() => {console.log('esto es abs path');})
+promiseAbsPath(pathUser).then(() => {console.log('hola');})
 .catch((error)=>{console.log(error)}); 
 
-// absPath('notebook.md');
+isFileOrDir(pathUser);
 
-// dirList();
+mdExt(pathUser).then(()=> {console.log('la ruta es un archivo md');})
+.catch((error)=>{console.log('la ruta no es un archivo md')});
 
-mdExt(pathUser).then(()=> {console.log('es archivo md');})
-.catch((error)=>{console.log(error)});
-
-console.log(pathAbs(pathUser), 'ss')

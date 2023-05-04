@@ -1,8 +1,10 @@
 
-const fs = require('fs');
-const mdLinks = (path, options) => {
-return new Promise((resolve,reject) => {
+
 // *************identifica si la ruta existe*************
+// no es necesario que sea promesa.
+const fs = require('fs');
+const existRoute = (path, options) => {
+return new Promise((resolve,reject) => {
 if (fs.existsSync(path)) {
 console.log('si existe');
 }
@@ -14,44 +16,46 @@ reject('La ruta no existe');
 }
 // *************¿la ruta es relativa o absoluta?*************
 const path = require('path');
-const absPath = (pathname, options) => {
+
+const promiseAbsPath = (route) => {
     return new Promise((resolve,reject) => {
-    if (pathname) {
-    console.log(path.dirname(__dirname))
+        const isAbsRoute = path.isAbsolute(route)
+        if(isAbsRoute == route){
+            console.log(route);
     }
+    // Si la ruta es relativa, convertirla a absoluta
     else {
+        console.log( path.resolve(route));
     // si no existe la ruta, rechaza la promesa
-    reject('La ruta no existe');
     } 
     });
     }
+// *************¿la ruta, es un archivo o un directorio?*************
 
-const pathAbs = (route) => {
-    if(path.isAbsolute(route)){
-        return route
-    }else{
-        return path.resolve(route)
-    }
+const isFileOrDir = (route) => {
+    fs.stat(route, (error, stats) => {
+        if (error) {
+            console.log(error);
+        }
+        else {
+            const routeIsFile = ("Path is file:", stats.isFile());
+            if (routeIsFile === true) {
+                console.log('la ruta es un archivo')
+            }
+            else {
+                const routeIsDoc = ("Path is directory:", stats.isDirectory());
+                if (routeIsDoc === true) {
+                    console.log('la ruta es un directorio')
+                }
+            }
+            }
+        });
 }
-// Si la ruta es relativa, convertirla a absoluta
-
-// ¿la ruta, es un archivo o un directorio?
 
 // si es un directorio: ¿tiene archivos?
 
 // ************* abrirlo y leer los archivos *************
-const dirList = (pathname, options) => {
-    const filenames = fs.readdirSync(__dirname);
-    console.log("\nCurrent directory filenames:");
-    filenames.forEach(pathname => {
-    console.log(pathname);
-    });
-    const fileObjs = fs.readdirSync(__dirname, { withFileTypes: true });
-    console.log("\nCurrent directory files:");
-    fileObjs.forEach(pathname => {
-    console.log('soy file',pathname);
-    });
-    };
+
 
 // ¿existen links?
 
@@ -85,9 +89,9 @@ const mdExt = (pathname, options) => {
 // if respuesta invalida retornar alerta: algo fue mal.
 
 module.exports = {
-mdLinks,
+existRoute,
 mdExt,
-dirList,
-absPath,
-pathAbs,
+promiseAbsPath,
+isFileOrDir,
+
 };
