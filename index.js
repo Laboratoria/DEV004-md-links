@@ -64,39 +64,19 @@ return new Promise((resolve, reject) => {
     });
 });
 }
-
-        
-
-
-
 // ************* si es un directorio: ¿tiene archivos? *************
-// Node.js program to demonstrate the
-// fs.readdirSync() method
+const dirFiles = (route) => {
+    let filenames = fs.readdirSync(route, { withFileTypes: true })
+   // con { withFileTypes: true } es obj y no solo string. 
+    console.log("\nCurrent directory filenames:");
+    filenames.forEach(file => {
+    console.log(file);
+    console.log(typeof(file.name));
+    });
+}
 
-// Import the filesystem module
-// const fs = require('fs');
 
-// Function to get current filenames
-// in directory
-// filenames = fs.readdirSync(__dirname);
-
-// console.log("\nCurrent directory filenames:");
-// filenames.forEach(file => {
-// console.log(file);
-// });
-
-// // Function to get current filenames
-// // in directory with "withFileTypes"
-// // set to "true"
-
-// fileObjs = fs.readdirSync(__dirname, { withFileTypes: true });
-
-// console.log("\nCurrent directory files:");
-// fileObjs.forEach(file => {
-// console.log(file);
-// });
-
-// ************* abrirlo y leer los archivos *************
+// ************* abrir directorio y leer los archivos *************
 
 
 // ¿existen links?
@@ -107,9 +87,9 @@ return new Promise((resolve, reject) => {
 
 //************* ¿existen rutas .md? *************
 
-const mdExt = (pathname, options) => {
+const mdExt = (route) => {
     return new Promise((resolve,reject) => {
-    const pathNameDef = path.extname(pathname);
+    const pathNameDef = path.extname(route);
         if (pathNameDef == path.extname('hello.md')) {
     console.log('es archivo md');
         }
@@ -136,5 +116,5 @@ mdExt,
 promiseAbsPath,
 isFileOrDir,
 readFile,
-
+dirFiles
 };
