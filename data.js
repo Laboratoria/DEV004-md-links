@@ -4,6 +4,14 @@ const fs = require('fs');
 
 // la ruta es absoluta?
 const isPathAbsolute = (route) => path.isAbsolute(route) 
+// si no es absoluta, conviertela a absoluta:
+const pathAbs = (route) => {
+    if(path.isAbsolute(route)){
+        return route
+    }else{
+        return path.resolve(route)
+    }
+}
 // *************¿la ruta, es un archivo o un directorio?*************
 // refactorizar, solo devuelve un booleano, no hay errores. no es necesario darle tantas vueltas. 
 // cuando algo devuelva una promesa, entonces si hay que usar then y catch 
