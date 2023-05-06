@@ -26,7 +26,30 @@ const pathAbs = (route) => path.resolve(route);
         
     // }
 // *************¿la ruta, es un archivo o un directorio?*************
-const isFileOrDir = (route) => stats.isFile(route);
+const isFileOrDir = (route) => {
+    fs.stat(route, (error, stats) => {
+      if (error) {
+        console.log(error);
+      } else if (stats.isFile()) {
+        console.log('la ruta es un archivo');
+      } else if (stats.isDirectory()) {
+        console.log('la ruta es un directorio');
+      }
+    });
+  };
+  const isFileOrDir = (route, callback) => {
+    fs.stat(route, (error, stats) => {
+      if (error) {
+        callback(error, null);
+      } else if (stats.isFile()) {
+        callback(null, 'archivo');
+      } else if (stats.isDirectory()) {
+        callback(null, 'directorio');
+      }
+    });
+  };
+// const isFileOrDir = (route) => fs.stat.isFile(route);
+// console.log ('esto es fileordir parametro',)
 // const isFileOrDir = (route) => {
 //     fs.stat(route, (error, stats) => {
 //         if (error) {
@@ -45,7 +68,8 @@ const isFileOrDir = (route) => stats.isFile(route);
 //             }
 //             }
 //         });
-
+//     }
+isFileOrDir ('/Users/chuz/Desktop/laboratoria/DEV004-md-links/notebook.md');
 // ************* si es un archivo: lee el archivo *************
 const readFile = (path = './notebook.md') => {
 return new Promise((resolve, reject) => {
