@@ -1,9 +1,9 @@
-// funciones pequeñas 
 const path = require('path');
 const fs = require('fs');
+// notas OH LUNA 
 // refactorizar, solo devuelve un booleano, no hay errores. no es necesario darle tantas vueltas. 
 // cuando algo devuelva una promesa, entonces si hay que usar then y catch 
-// la ruta existe?
+// ***************LA RUTA EXISTE****************
 const pathExist = (route) => fs.existsSync(route);
 // const pathExist = (route) => {
 //     if (fs.existsSync(route)===true){
@@ -13,9 +13,11 @@ const pathExist = (route) => fs.existsSync(route);
 //     }
 // }
 
-// la ruta es absoluta?
+//  *************** la ruta es absoluta?  ***************
 const isPathAbsolute = (route) => path.isAbsolute(route);
-// si no es absoluta, conviertela a absoluta:
+
+
+//  ***************si no es absoluta, conviertela a absoluta: ***************
 const pathAbs = (route) => path.resolve(route);
 // console.log('ESTO ES PATHABBS',path.resolve())
     // if(path.isAbsolute(route)){
@@ -24,25 +26,26 @@ const pathAbs = (route) => path.resolve(route);
         
     // }
 // *************¿la ruta, es un archivo o un directorio?*************
-const isFileOrDir = (route) => {
-    fs.stat(route, (error, stats) => {
-        if (error) {
-            console.log(error);
-        }
-        else {
-            const routeIsFile = ("Path is file:", stats.isFile());
-            if (routeIsFile === true) {
-                console.log('la ruta es un archivo')
-            }
-            else {
-                const routeIsDoc = ("Path is directory:", stats.isDirectory());
-                if (routeIsDoc === true) {
-                    console.log('la ruta es un directorio')
-                }
-            }
-            }
-        });
-}
+const isFileOrDir = (route) => stats.isFile(route);
+// const isFileOrDir = (route) => {
+//     fs.stat(route, (error, stats) => {
+//         if (error) {
+//             console.log(error);
+//         }
+//         else {
+//             const routeIsFile = ("Path is file:", stats.isFile());
+//             if (routeIsFile === true) {
+//                 console.log('la ruta es un archivo')
+//             }
+//             else {
+//                 const routeIsDoc = ("Path is directory:", stats.isDirectory());
+//                 if (routeIsDoc === true) {
+//                     console.log('la ruta es un directorio')
+//                 }
+//             }
+//             }
+//         });
+
 // ************* si es un archivo: lee el archivo *************
 const readFile = (path = './notebook.md') => {
 return new Promise((resolve, reject) => {

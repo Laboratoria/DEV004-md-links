@@ -12,9 +12,8 @@ const mdLinks = (path, options) => {
        let routeAbs = pathAbs(path) 
        resolve(routeAbs);
       }else{
-        
-          let routeAbsOrigin = path
-         resolve(routeAbsOrigin);
+          let routeAbs = path
+         resolve(routeAbs);
          }
       }
       });
