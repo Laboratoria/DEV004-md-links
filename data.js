@@ -1,20 +1,29 @@
 // funciones pequeñas 
 const path = require('path');
 const fs = require('fs');
-
-// la ruta es absoluta?
-const isPathAbsolute = (route) => path.isAbsolute(route) 
-// si no es absoluta, conviertela a absoluta:
-const pathAbs = (route) => {
-    if(path.isAbsolute(route)){
-        return route
-    }else{
-        return path.resolve(route)
-    }
-}
-// *************¿la ruta, es un archivo o un directorio?*************
 // refactorizar, solo devuelve un booleano, no hay errores. no es necesario darle tantas vueltas. 
 // cuando algo devuelva una promesa, entonces si hay que usar then y catch 
+// la ruta existe?
+const pathExist = (route) => fs.existsSync(route);
+// const pathExist = (route) => {
+//     if (fs.existsSync(route)===true){
+//         route = route 
+//     }else{
+//         throw "La ruta que ingresaste no existe"
+//     }
+// }
+
+// la ruta es absoluta?
+const isPathAbsolute = (route) => path.isAbsolute(route);
+// si no es absoluta, conviertela a absoluta:
+const pathAbs = (route) => path.resolve(route);
+// console.log('ESTO ES PATHABBS',path.resolve())
+    // if(path.isAbsolute(route)){
+    //     return route
+    // }else{
+        
+    // }
+// *************¿la ruta, es un archivo o un directorio?*************
 const isFileOrDir = (route) => {
     fs.stat(route, (error, stats) => {
         if (error) {
@@ -109,4 +118,6 @@ isFileOrDir,
 readFile,
 dirFiles,
 findUrls,
+pathAbs,
+pathExist,
 };

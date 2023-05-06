@@ -1,18 +1,28 @@
 const fs = require("fs");
 const { isPathAbsolute } = require("./data");
+const {pathAbs} = require("./data");
+const {pathExist} = require ("./data");
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
-    if (fs.existsSync(path)) {
+    if (!pathExist(path)) {
+      throw ('la ruta no existe')
+    }else{
       if (!isPathAbsolute(path)){
-        resolve (!isPathAbsolute)
+       let routeAbs = pathAbs(path) 
+       resolve(routeAbs);
+      }else{
+        
+          let routeAbsOrigin = path
+         resolve(routeAbsOrigin);
+         }
       }
-    } else {
-      // si no existe la ruta, rechaza la promesa
-      reject("La ruta no existe");
-    }
-  });
-};
+      });
+    };
+    
+  
+
+
 
 module.exports = mdLinks;
 // *************¿la ruta es relativa o absoluta?*************
