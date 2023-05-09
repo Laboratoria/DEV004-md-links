@@ -26,18 +26,8 @@ const pathAbs = (route) => path.resolve(route);
         
     // }
 // *************¿la ruta, es un archivo o un directorio?*************
-// const isFileOrDir = (route) => {
-//     fs.stat(route, (error, stats) => {
-//       if (error) {
-//         console.log(error);
-//       } else if (stats.isFile()) {
-//         console.log('la ruta es un archivo');
-//       } else if (stats.isDirectory()) {
-//         console.log('la ruta es un directorio');
-//       }
-//     });
-//   };
-//   const isFileOrDir = (route, callback) => {
+
+//   const isFileOrDir = (route) => {
 //     fs.stat(route, (error, stats) => {
 //       if (error) {
 //         callback(error, null);
@@ -50,39 +40,59 @@ const pathAbs = (route) => path.resolve(route);
 //   };
 // const isFileOrDir = (route) => fs.stat.isFile(route);
 // console.log ('esto es fileordir parametro',)
-// const isFileOrDir = (route) => {
-//     fs.stat(route, (error, stats) => {
-//         if (error) {
-//             console.log(error);
-//         }
-//         else {
-//             const routeIsFile = ("Path is file:", stats.isFile());
-//             if (routeIsFile === true) {
-//                 console.log('la ruta es un archivo')
-//             }
-//             else {
-//                 const routeIsDoc = ("Path is directory:", stats.isDirectory());
-//                 if (routeIsDoc === true) {
-//                     console.log('la ruta es un directorio')
-//                 }
-//             }
-//             }
-//         });
-//     }
+const isFileOrDir = (route) => {
+    fs.stat(route, (error, stats) => {
+        if (error) {
+            resolve(error);
+        }
+        else {
+            const routeIsFile = ("Path is file:", stats.isFile());
+            if (routeIsFile === true) {
+                console.log ('la ruta es un archivo')
+            }
+            else {
+                const routeIsDoc = ("Path is directory:", stats.isDirectory());
+                if (routeIsDoc === true) {
+                    console.log('la ruta es un directorio')
+                }
+            }
+            }
+        });
+    }
+    
 // isFileOrDir ('/Users/chuz/Desktop/laboratoria/DEV004-md-links/notebook.md');
+
+// const isFileOrDirSimple = (route) => {
+//     fs.stats((route) => {
+//     if (route.isFile()) {
+//         const isFile= route;
+//         return route;
+//     }
+    
+//     else {
+//         const isDirectory = route
+//         return route; 
+//     }
+//     };
+// }
+
+// isFileOrDirSimple ('/Users/chuz/Desktop/laboratoria/DEV004-md-links/notebook.md');
+
 // ************* si es un archivo: lee el archivo *************
-const readFile = (path = './notebook.md') => {
+const readFile = (path) => {
 return new Promise((resolve, reject) => {
     fs.readFile(path,'utf-8', (err,data)=> {
         if (err){
             reject(err)
         } else{
-            resolve(data)
-            console.log(data)
+            const dataResolved = data
+            resolve(dataResolved);
+            console.log(dataResolved)
         }
     });
 });
 }
+// readFile("notebook.md")
 // ************* si es un directorio: ¿tiene archivos? *************
 const dirFiles = (route) => {
     return new Promise ((resolve, reject) => {
