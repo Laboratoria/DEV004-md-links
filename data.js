@@ -141,7 +141,7 @@ const dirFiles = (route) => {
 //   }
 // });
 
-const findUrl = (text) => {
+const findUrl =((text) => {
     const regex = /\[(.*?)\]\((.*?)\)/g;
     let match;
     
@@ -151,12 +151,14 @@ const findUrl = (text) => {
       
       console.log('Texto del enlace:', textoEnlace);
       console.log('URL del enlace:', urlEnlace);
-      console.log();
     }
-  };
+    });
+
+
+
   
-  const texted = 'hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)';
-  findUrl(texted);
+//   const texted = 'hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)';
+//   findUrl(texted);
   
 
 // const findUrls = (text) => {
@@ -189,4 +191,5 @@ module.exports = {
   dirFiles,
   pathAbs,
   pathExist,
+  findUrl,
 };
