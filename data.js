@@ -87,6 +87,7 @@ const mdExt = (route) => path.extname(route);
 // //   }
 // // };
 // console.log(mdExt('readme.js'))
+
 // ************* si el archivo es lee el archivo *************
 const readFile = (path) => {
   return new Promise((resolve, reject) => {
@@ -121,10 +122,13 @@ const dirFiles = (route) => {
 // ************* ¿existen links? *************
 const findUrls = (text) => {
   // método match js. argumneto (regex, expresion regular)
-
   const result = text.match(/\bhttps?:\/\/\S+\b/g);
   return result;
 };
+// const text = "https://www.google.com es un gran buscador"
+// const urlsEncontradas = findUrls(text);
+// console.log(urlsEncontradas);
+
 
 // false: error
 

@@ -1,10 +1,9 @@
 const fs = require("fs");
-const { isPathAbsolute } = require("./data");
+const { isPathAbsolute, findUrls } = require("./data");
 const { pathAbs } = require("./data");
 const { pathExist } = require("./data");
 const { readFile } = require("./data");
 const {mdExt} = require("./data");
-
 
 const mdLinks = (path, options) => {
   return new Promise((resolve, reject) => {
@@ -26,11 +25,16 @@ const mdLinks = (path, options) => {
       }
       if (lila) {
         readFile(lila).then((data) => {
-          resolve(data);
+          const mdData = data;
+          if (mdData) {
+            const urlsFound = findUrls(mdData)
+            resolve (urlsFound)
+          }
         }).catch((err) => {
           reject(err);
         });
       }
+     
     }
   });
 };
