@@ -120,14 +120,52 @@ const dirFiles = (route) => {
 // no creo que sea necesario hgacer una nueva.
 
 // ************* ¿existen links? *************
-const findUrls = (text) => {
-  // método match js. argumneto (regex, expresion regular)
-  const result = text.match(/\bhttps?:\/\/\S+\b/g);
-  return result;
-};
-// const text = "https://www.google.com es un gran buscador"
-// const urlsEncontradas = findUrls(text);
-// console.log(urlsEncontradas);
+// const archivoMd = 'readme.md';
+
+// fs.readFile(archivoMd, 'utf-8', (err, data) => {
+//   if (err) {
+//     console.error('Error al leer el archivo:', err);
+//     return;
+//   }
+
+//   const regex = /\[(.*?)\]\((.*?)\)/g;
+//   let match;
+  
+//   while ((match = regex.exec(data)) !== null) {
+//     const textoEnlace = match[1];
+//     const urlEnlace = match[2];
+    
+//     console.log('Texto del enlace:', textoEnlace);
+//     console.log('URL del enlace:', urlEnlace);
+//     console.log();
+//   }
+// });
+
+const findUrl = (text) => {
+    const regex = /\[(.*?)\]\((.*?)\)/g;
+    let match;
+    
+    while ((match = regex.exec(text)) !== null) {
+      const textoEnlace = match[1];
+      const urlEnlace = match[2];
+      
+      console.log('Texto del enlace:', textoEnlace);
+      console.log('URL del enlace:', urlEnlace);
+      console.log();
+    }
+  };
+  
+  const texted = 'hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)';
+  findUrl(texted);
+  
+
+// const findUrls = (text) => {
+//   // método match js. argumneto (regex, expresion regular)
+//   const result = text.match(/\bhttps?:\/\/\S+\b/g);
+//   return result;
+// };
+
+
 
 
 // false: error
@@ -149,7 +187,6 @@ module.exports = {
   isPathAbsolute,
   readFile,
   dirFiles,
-  findUrls,
   pathAbs,
   pathExist,
 };

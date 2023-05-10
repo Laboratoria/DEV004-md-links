@@ -3,7 +3,7 @@ const { isPathAbsolute } = require("../data.js");
 const { pathAbs } = require("../data.js");
 const { mdExt } = require("../data.js");
 const { readFile } = require("../data.js");
-const {findUrls} = require("../data.js");
+
 
 describe("pathExist", () => {
   it("si la ruta no existe devuelve false", () => {
@@ -58,13 +58,6 @@ describe("mdExt", () => {
               });
             });
           });
-          describe("findUrls", () => {
-            it("identifica si hay un url en un string", () => {
-              return findUrls("content.md").then((text) => {
-                expect(text).toBe(1);
-                  });
-                });
-              });
           
     });
 
