@@ -1,5 +1,7 @@
 const path = require("path");
 const fs = require("fs");
+const axios = require('axios');
+
 // notas OH LUNA
 // refactorizar, solo devuelve un booleano, no hay errores. no es necesario darle tantas vueltas.
 // cuando algo devuelva una promesa, entonces si hay que usar then y catch
@@ -182,19 +184,49 @@ const findUrl = (text) => {
 // }
 // });
 
-//    
-// Found football start=6 end=14.
-// Found foosball start=16 end=24.
-
-// matches iterator is exhausted after the for...of iteration
-// Call matchAll again to create a new iterator
-// Array.from(str.matchAll(regexp), (m) => m[0]);
-// [ "football", "foosball" ]
 
 //   const texted = 'hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)';
 //   findUrl(texted);
 
-// ejecutar validate
+// ************* comprobar que un href funciona *************
+// const url = 'https://www.google.com';
+const validateUrl = ((url) => {
+axios.get(url) 
+  .then(response => {
+    // El estado de la respuesta se encuentra en response.status
+    if (response.status === 200) {
+      console.log('La URL está disponible (estado 200)');
+    } else if (response.status === 404) {
+      console.log('La URL no fue encontrada (estado 404)');
+    }
+  })
+  .catch(error => {
+    console.log('Ocurrió un error al realizar la solicitud:', error.message);
+  });
+});
+validateUrl('https://www.google.com');
+// const validateUrl = (href) => {
+// return new Promise ((resolve, reject) => {
+//     axios.get(href)
+//   .then(response => {
+//     // El estado de la respuesta se encuentra en response.status
+//     if (response.status === 200) {
+//       console.log('La URL está disponible (estado 200)');
+//     } else if (response.status === 404) {
+//       console.log('La URL no fue encontrada (estado 404)');
+//     }
+//   })
+//   .catch(error => {
+//     console.log('Ocurrió un error al realizar la solicitud:', error.message);
+//   });
+// });
+// };
+
+// validateUrl('http//www.google.com')
+
+
+
+
 
 // if validate false retornar {href,text,file}
 
@@ -212,4 +244,5 @@ module.exports = {
   pathAbs,
   pathExist,
   findUrl,
+  validateUrl,
 };
