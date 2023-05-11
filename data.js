@@ -120,6 +120,21 @@ const dirFiles = (route) => {
 // no creo que sea necesario hgacer una nueva.
 
 // ************* ¿existen links? *************
+const findUrl = (text) => {
+    const regexp = /\[(.*?)\]\((.*?)\)/g;
+    const matches = text.matchAll(regexp);
+    const ArrTotalLinks = [];
+  
+    for (const match of matches) {
+      const linkObj = {
+        text: match[1],
+        link: match[2]
+      };
+      ArrTotalLinks.push(linkObj);
+    }
+  
+    return ArrTotalLinks;
+  };
 // const archivoMd = 'readme.md';
 
 // fs.readFile(archivoMd, 'utf-8', (err, data) => {
@@ -130,49 +145,54 @@ const dirFiles = (route) => {
 
 //   const regex = /\[(.*?)\]\((.*?)\)/g;
 //   let match;
-  
+
 //   while ((match = regex.exec(data)) !== null) {
 //     const textoEnlace = match[1];
 //     const urlEnlace = match[2];
-    
+
 //     console.log('Texto del enlace:', textoEnlace);
 //     console.log('URL del enlace:', urlEnlace);
 //     console.log();
 //   }
 // });
 
-const findUrl =((text) => {
-    const regex = /\[(.*?)\]\((.*?)\)/g;
-    let match;
-    
-    while ((match = regex.exec(text)) !== null) {
-      const textoEnlace = match[1];
-      const urlEnlace = match[2];
-      
-      console.log('Texto del enlace:', textoEnlace);
-      console.log('URL del enlace:', urlEnlace);
-    }
-    });
+// const findUrl =((text) => {
+//     const regex = /\[(.*?)\]\((.*?)\)/g;
+//     let match;
 
+//     while ((match = regex.exec(text)) !== null) {
+//       const textoEnlace = match[1];
+//       const urlEnlace = match[2];
 
+//       console.log('Texto del enlace:', textoEnlace);
+//       console.log('URL del enlace:', urlEnlace);
+//     }
+//     });
+// const findUrl =((text) => {
+// const regexp = /\[(.*?)\]\((.*?)\)/g;
+// // const str =
+// //   "hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)";
+// const matches = text.matchAll(regexp);
 
-  
+// for (const match of matches) {
+//   console.log(
+//     `text: ${match[0]} link: ${match[1]} 
+//     .`
+//   );
+// }
+// });
+
+//    
+// Found football start=6 end=14.
+// Found foosball start=16 end=24.
+
+// matches iterator is exhausted after the for...of iteration
+// Call matchAll again to create a new iterator
+// Array.from(str.matchAll(regexp), (m) => m[0]);
+// [ "football", "foosball" ]
+
 //   const texted = 'hola amigos como están, deberían visitar los siguientes links: [YouTube](www.youtube.com)';
 //   findUrl(texted);
-  
-
-// const findUrls = (text) => {
-//   // método match js. argumneto (regex, expresion regular)
-//   const result = text.match(/\bhttps?:\/\/\S+\b/g);
-//   return result;
-// };
-
-
-
-
-// false: error
-
-// true:
 
 // ejecutar validate
 
