@@ -52,15 +52,22 @@ const getStatus = (url) =>{
 }
 
 const verifyLinks = (urls) => {
+  console.log ('esto es urls', urls)
 const GotUrls = urls.map((obj) => obj.link);
 console.log(typeof GotUrls);
 const PROMESAS = GotUrls.map((url) => getStatus(url));
 Promise.allSettled(PROMESAS)
   .then((rptas) => {
-    rptas.forEach((res) => console.log("res: ", res.status));
+    rptas.forEach((res) => {
+      if( res.value !== undefined){
+        console.log("res: ", res.value.status)
+      }else {
+        
+      }
+      });
   })
-  .catch((err) =>  {
-    err.forEach((res) => console.log("res: ", res.status));
+  .catch((error) =>  {
+     console.log("error: ", error);
   })
   console.log(PROMESAS);
   console.log(typeof(PROMESAS))
