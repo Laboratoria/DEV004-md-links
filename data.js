@@ -37,7 +37,7 @@ const findUrl = (text) => {
     for (const match of matches) {
       const linkObj = {
         text: match[1],
-        link: match[2]
+        href: match[2]
       };
       ArrTotalLinks.push(linkObj);
     }
@@ -53,27 +53,33 @@ const getStatus = (url) =>{
 
 const verifyLinks = (urls) => {
   console.log ('esto es urls', urls)
-const GotUrls = urls.map((obj) => obj.link);
+const GotUrls = urls.map((obj) => obj.href);
 console.log(typeof GotUrls);
 const PROMESAS = GotUrls.map((url) => getStatus(url));
 Promise.allSettled(PROMESAS)
-  .then((rptas) => {
-    rptas.forEach((res) => {
-      if( res.value !== undefined){
-        console.log("res: ", res.value.status)
+  .then((url) => {
+    url.forEach((res,index) => {
+      if( res.value !== undefined && res.value.status === 200){
+        const verifiedStatus ={status: res.value.status}
+        const urlsIndex = urls[index]
+        const verifiedObject200 = {...urlsIndex,...verifiedStatus}
+        console.log(verifiedObject200)
       }else {
-        
+        const linkNotFound = {status: 404}
+        const urlsIndex404 = urls[0]
+        const verifiedObject404 = { ...urlsIndex404,...linkNotFound}
+        console.log(verifiedObject404)
       }
       });
   })
   .catch((error) =>  {
      console.log("error: ", error);
   })
-  console.log(PROMESAS);
-  console.log(typeof(PROMESAS))
+  // console.log(PROMESAS);
+  // console.log(typeof(PROMESAS))
   };
 
-
+// aprovechar los indieces como parametros del foreach y retornar el objeto solicitado. 
 
 
 
