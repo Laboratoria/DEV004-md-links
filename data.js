@@ -52,7 +52,7 @@ const getStatus = (url) =>{
 }
 
 const verifyLinks = (urls) => {
-  console.log ('esto es urls', urls)
+  // console.log ('esto es urls', urls)
 const GotUrls = urls.map((obj) => obj.href);
 console.log(typeof GotUrls);
 const PROMESAS = GotUrls.map((url) => getStatus(url));
@@ -62,12 +62,14 @@ Promise.allSettled(PROMESAS)
       if( res.value !== undefined && res.value.status === 200){
         const verifiedStatus ={status: res.value.status}
         const urlsIndex = urls[index]
-        const verifiedObject200 = {...urlsIndex,...verifiedStatus}
+        const okOrFail200 = {ok: "ok"}
+        const verifiedObject200 = {...urlsIndex,...verifiedStatus,...okOrFail200}
         console.log(verifiedObject200)
       }else {
         const linkNotFound = {status: 404}
+        const okOrFail404 = {ok: "fail"}
         const urlsIndex404 = urls[0]
-        const verifiedObject404 = { ...urlsIndex404,...linkNotFound}
+        const verifiedObject404 = { ...urlsIndex404,...linkNotFound,...okOrFail404}
         console.log(verifiedObject404)
       }
       });
