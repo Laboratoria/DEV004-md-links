@@ -11,6 +11,19 @@ const isPathAbsolute = (route) => path.isAbsolute(route);
 //  ***************si no es absoluta, conviertela a absoluta: ***************
 const pathAbs = (route) => path.resolve(route);
 
+//  ***************es un archivo o un directorio: ***************
+const isFile = (route) => {
+  fs.stat(route, (error, stats) => {
+    if (error) {
+      console.error(error);
+      return;
+    }
+    if (stats.isFile()) {
+      const routeIsFile = route;
+  }
+})
+};
+
 //************* ¿la ruta es .md? *************
 const mdExt = (route) => path.extname(route);
 
@@ -95,4 +108,5 @@ module.exports = {
   pathExist,
   findUrl,
   verifyLinks,
+  isFile,
 };
