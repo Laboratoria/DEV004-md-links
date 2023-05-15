@@ -19,6 +19,7 @@ const mdLinks = (path, options) => {
       } else {
         routeAbs = path;
       }
+      // el llamado a esa otra funcion. 
       const isMdRoute = mdExt(routeAbs) === ".md";
       let lila;
       if (isMdRoute) {
@@ -44,6 +45,5 @@ const mdLinks = (path, options) => {
     }
   });
 };
-console.log (typeof(verifiedLinks))
 
 module.exports = mdLinks;
