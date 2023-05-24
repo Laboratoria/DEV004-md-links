@@ -11,6 +11,9 @@
   },
   "main": "index.js",
   "directories": {
+    "test": "test"
+  },
+  "scripts": {
     "test": "jest --coverage"
   },
   "repository": {
