@@ -1,4 +1,5 @@
-const mdLinks = require('../');
+//const mdLinks = require('../'); vamos a usar import y export, no require.
+import { mdLinks } from '../mdlinks.js';  
 
 
 describe('mdLinks', () => {

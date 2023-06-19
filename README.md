@@ -306,6 +306,12 @@ siguiente interfaz:
 
 #### `mdLinks(path, options)`
 
+import {mdLinks} from 'libreria-nandy'
+
+path = '/Users/fernanda.acuna/DEV004-md-links/Learnyounode'
+resultado = mdLinks(path, options)
+
+
 ##### Argumentos
 
 * `path`: Ruta **absoluta** o **relativa** al **archivo** o **directorio**.
