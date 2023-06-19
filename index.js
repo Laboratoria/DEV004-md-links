@@ -24,12 +24,19 @@ export const mdExists = (ruta) => {
 });*/
 };
 
+// esta funcion verifica si el archivo en la ruta dada es valido
+// y devuelve una promesa
 export const mdValid = (ruta) =>{
+  //se crea una promesa con los parametros de callback resolve y reject
   return new Promise((resolve, reject)=>{
+//la funcion asincronica fs.stat toma la ruta del archivo y una funcion callback
     fs.stat(ruta, (err, stats) => {
+      //throw error dentiene la ejecucion y se podria manejar en otro lugar de mi codigo
       if (err) throw err;
       // console.log(stats.isFile());
+      // stats.isFile verifica si el archivo es un archivo valido, si da true: continua con la verificacion
       if (stats.isFile()== true) {
+        //con path.extname se obtiene la extencion del archivo, si es md, se resuelve true, sino reject
           if(path.extname(ruta) == '.md'){
               resolve(true)
           }else{

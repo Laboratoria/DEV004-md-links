@@ -4,17 +4,22 @@ import path from 'path'
   // ...
 //};
 // import { mdLinks } from "./mdlinks";
-// mdLinks();
+
+// se importan estas funciones desde index.js
 import { mdExists, mdValid } from './index.js'
+
 const ruta = "README.md";  // existe
 //const ruta = "REDME.md";  // NO existe
 //const ruta = "test";  // archivo
-
+// se esta comprobando que mdExist devuelva true, si devuelve true: se ejecuta el primer if.
+// Sino, ejecuta else
 if(mdExists(ruta) == true){
+    //path.resolve convierte la ruta relativa en absoluta
   const rutaAbsoluta = path.resolve(ruta) // ruta resuelta
   mdValid(rutaAbsoluta)
   //console.log('Ok', mdValid(rutaAbsoluta));
   mdValid(rutaAbsoluta)
+  //si la promeda se resuelve se ejecuta then
   .then((response)=>{
     console.log(response);
   })
@@ -22,6 +27,7 @@ if(mdExists(ruta) == true){
     console.log(err);
   })
 }else{
+    //si el archivo no existe, se imprime fail en la consola
   console.log('Fail');
 }
 // importar fn mdread
